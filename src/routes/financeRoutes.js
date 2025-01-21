@@ -7,6 +7,7 @@ const {
   createFinance,
   updateFinance,
   deleteFinance,
+  getFinanceReport,
 } = require('../controllers/financeController');
 
 // Route untuk mendapatkan semua data finance
@@ -20,5 +21,8 @@ router.put('/:id', protect, updateFinance);
 
 // Route untuk menghapus data finance
 router.delete('/:id', protect, deleteFinance);
+
+// Route untuk mendapatkan laporan finance
+router.get('/report', protect, getFinanceReport);
 
 module.exports = router;
