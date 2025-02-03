@@ -1,34 +1,32 @@
-// Import mongoose untuk membuat skema
 const mongoose = require('mongoose');
 
-// Definisi skema untuk Finance
-const financeSchema = mongoose.Schema(
+const financeSchema = new mongoose.Schema(
   {
     user: {
-      type: mongoose.Schema.Types.ObjectId, // Relasi ke model User
-      required: true, // Validasi: wajib diisi
-      ref: 'User', // Referensi ke koleksi User
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
     title: {
-      type: String, // Tipe data string
-      required: [true, 'Judul diperlukan'], // Validasi: wajib diisi
+      type: String,
+      required: true,
     },
     amount: {
-      type: Number, // Tipe data angka
-      required: [true, 'Jumlah diperlukan'], // Validasi: wajib diisi
+      type: Number,
+      required: true,
     },
     type: {
-      type: String, // Tipe data string
-      required: [true, 'Tipe diperlukan'], // Validasi: wajib diisi
-      enum: ['income', 'expense'], // Hanya boleh 'income' atau 'expense'
+      type: String,
+      enum: ['income', 'expense'],
+      required: true,
+    },
+    category: {
+      type: String,
+      enum: ['salary', 'education', 'health', 'food', 'transportation', 'entertainment', 'utilities', 'others'],
+      required: true,
     },
   },
-  {
-    timestamps: true, // Tambahkan kolom createdAt dan updatedAt
-  }
+  { timestamps: true }
 );
 
-// Buat model Finance berdasarkan skema
-const Finance = mongoose.model('Finance', financeSchema);
-
-module.exports = Finance;
+module.exports = mongoose.model('Finance', financeSchema);
